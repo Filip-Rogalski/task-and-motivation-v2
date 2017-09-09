@@ -1,0 +1,229 @@
+{
+  "persons": [
+    {
+      "id": -1,
+      "name": "admin",
+      "password": "admin",
+      "score": 0,
+      "currentTasks": [],
+      "prevTasks": []
+    },
+    {
+      "id": 1,
+      "name": "Krzys",
+      "password": "1234",
+      "score": 613,
+      "currentTasks": [
+        4,
+        5,
+        6
+      ],
+      "prevTasks": [
+        3,
+        2,
+        1,
+        2,
+        3,
+        1,
+        7,
+        3,
+        9,
+        8,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Krysia",
+      "password": "7890",
+      "score": 45,
+      "currentTasks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "prevTasks": [
+        3,
+        2
+      ]
+    },
+    {
+      "name": "John",
+      "password": "asdf",
+      "score": 325,
+      "currentTasks": [
+        2
+      ],
+      "prevTasks": [
+        1,
+        4,
+        8,
+        6,
+        3
+      ],
+      "id": 4
+    },
+    {
+      "name": "Johnny",
+      "score": 423,
+      "currentTasks": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        2,
+        3,
+        5,
+        8
+      ],
+      "prevTasks": [
+        1,
+        4,
+        4,
+        5,
+        6,
+        4,
+        5,
+        6,
+        5,
+        7
+      ],
+      "id": 5
+    },
+    {
+      "name": "Margaret",
+      "score": 0,
+      "currentTasks": [
+        1,
+        2,
+        3,
+        9,
+        13
+      ],
+      "prevTasks": [],
+      "id": 8
+    },
+    {
+      "name": "Elżbieta",
+      "score": 0,
+      "currentTasks": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prevTasks": [],
+      "id": 9
+    },
+    {
+      "name": "Jerry",
+      "score": 0,
+      "currentTasks": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prevTasks": [],
+      "id": 10
+    },
+    {
+      "name": "Ala",
+      "password": "12",
+      "score": 0,
+      "currentTasks": [
+        1,
+        2,
+        14
+      ],
+      "prevTasks": [],
+      "id": 11
+    },
+    {
+      "name": "Helenka",
+      "password": "Hel",
+      "score": 305,
+      "currentTasks": [],
+      "prevTasks": [
+        3,
+        9,
+        13
+      ],
+      "id": 12
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "breakfast",
+      "periodic": true,
+      "score": 25
+    },
+    {
+      "id": 2,
+      "name": "organize party",
+      "periodic": false,
+      "score": 45
+    },
+    {
+      "id": 3,
+      "name": "wash dishes",
+      "periodic": true,
+      "score": 25
+    },
+    {
+      "name": "Okna",
+      "periodic": false,
+      "score": "200",
+      "id": 8
+    },
+    {
+      "name": "monthly report",
+      "periodic": false,
+      "score": "200",
+      "id": 9
+    },
+    {
+      "name": "Get mail",
+      "periodic": "false",
+      "score": "40",
+      "id": 10
+    },
+    {
+      "name": "Check White-board markers",
+      "periodic": "on",
+      "score": "80",
+      "id": 13
+    },
+    {
+      "name": "Fill Coffee-machine",
+      "periodic": "on",
+      "score": "120",
+      "id": 14
+    },
+    {
+      "name": "Prepare meeting",
+      "periodic": false,
+      "score": "50",
+      "id": 15
+    }
+  ]
+}
