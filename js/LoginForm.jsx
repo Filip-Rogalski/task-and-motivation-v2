@@ -28,7 +28,7 @@ class LoginForm extends Component {
             } else {
                 console.log('błąd logowania!');
             }
-        })    
+        });
     }
 
     render(){

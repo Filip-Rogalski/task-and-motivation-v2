@@ -37,7 +37,7 @@ body {
 }
 
 .row {
-    width: 900px;
+    width: 1100px;
     margin: 0 auto;
     position: relative;
     &:after, 
@@ -242,10 +242,10 @@ footer {
     }
     
     #remove-task,
-    #complete-task {
+    #complete-task,
+    #remove-periodical {
         display: inline-block;
         background-color: #F7C331;
-        width: 30px;
         text-align: center;
     
         &:hover {
@@ -253,6 +253,16 @@ footer {
             background-color: #6B7A8F;
             color: #F7C331;
         }
+    }
+    
+    #remove-task,
+    #complete-task {
+        width: 30px;
+    }
+    
+    #remove-periodical {
+        padding: 0 5px;
+        text-transform: lowercase;
     }
     
     #remove-task-admin {
@@ -314,6 +324,7 @@ footer {
         }
     }
     
+    .task-info, 
     .periodical-info {
         font-size: 0.6em;
     }
@@ -322,16 +333,18 @@ footer {
 
 .personal-card {
     text-transform: uppercase;
-    width: 280px;
+    width: calc(33% - 20px);
     height: 400px;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
     overflow: scroll;
     border-radius: 10px;
     background-color: #F6E1C4;
     
     .periodical-info {
         font-size: 0.6em;
+        width: 30%;
+        display: inline-block;
     }
     
     .label:after,
@@ -379,20 +392,29 @@ footer {
         }
         
         li {
+            width: 100%;
             float: left;
             line-height: 1.6em;
             border: 1px solid #B8C7DC;
-            margin: 0.1em;
+            margin-top: 0.1em;
+            margin-bottom: 0.1em;
             padding-left: 5px;
             padding-right: 5px;
             background-color: #FFFADD;
             border-radius: 5px;
         }
     }
-        
+     
+    .add-button {
+        background-color: #F7882F;
+        color: #6B7A8F;
+        padding: 0 5px;
+    }
+    
     .add-button:hover {
         cursor: pointer;
-        background-color: #F7C331;
+        background-color: #6B7A8F;
+        color: #F7882F;
     }
     
     .total {
@@ -455,4 +477,43 @@ input {
 
 input[type=submit] {
     font-family: 'ralewaybold';
+}
+
+.period-form {
+    width: 85%;
+    display: inline-block;
+}
+
+.period-select,
+input[type=date] {
+    vertical-align: top;
+    margin: 0;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-family: 'ralewayregular';
+    font-size: 0.8em;
+    background: transparent;
+    border: 1px solid #6B7A8F;
+    width: 60%;
+    
+    &:focus {
+        outline: none;
+    }
+}
+
+input[type=date] {
+    
+    &::-webkit-inner-spin-button,
+    &::-moz-inner-spin-button
+    { 
+        display: none; 
+    }
+
+}
+
+.block {
+    width: 85%;
+    display: inline-block;
 }

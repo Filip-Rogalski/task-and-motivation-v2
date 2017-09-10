@@ -4,7 +4,7 @@ import filterTasks from './filterTasks_1';
 class PersonalMotivation extends Component {
     constructor(){
         super();
-        this.state = {id: '', name: '', currentTasks: [], prevTasks: [], score: 0, tasks: [], prevTasksToShow: [], currentTasksToShow: []}
+        this.state = {id: '', name: '', currentTasks: [], prevTasks: [], periodicTasks: [], score: 0, tasks: [], prevTasksToShow: [], currentTasksToShow: []}
     }
     
     componentWillMount = () => {
@@ -17,6 +17,7 @@ class PersonalMotivation extends Component {
                      name: data.name,
                      currentTasks: data.currentTasks,
                      prevTasks: data.prevTasks,
+                     periodicTasks: data.periodicTasks,
                      score: data.score
                  });
             });
@@ -35,7 +36,7 @@ class PersonalMotivation extends Component {
     
    componentDidUpdate = () => {
         let newCurrent = filterTasks(this.state.tasks, this.state.currentTasks);
-       let newPrev = filterTasks(this.state.tasks, this.state.prevTasks);
+        let newPrev = filterTasks(this.state.tasks, this.state.prevTasks);
        
         setTimeout(() => {
             this.setState({
@@ -45,35 +46,12 @@ class PersonalMotivation extends Component {
         }, 0);
     }
     
-    removeTask = (e) => {
-        console.log('rt');
-        let personid = this.state.id;
-        let taskid = parseInt(e.target.parentElement.dataset.taskid, 10);
-        let curTasks = this.state.currentTasks;
-        let updatedCurTasks = curTasks.filter(element => {
-            return element !== taskid;
-        });
-        this.setState({ currentTasks: updatedCurTasks });
-        
-        let modification = {
-            currentTasks: updatedCurTasks,
-        }
-        fetch('http://localhost:3000/persons/' + this.state.id, {
-            method: 'PATCH',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify( modification )
-        });
-    }
-    
-    completeTask = (e) => {
-        
+   completeTask = (e) => {
         let personid = this.state.id;
        let taskid = parseInt(e.target.parentElement.dataset.taskid, 10);
         let taskval = parseInt(e.target.parentElement.dataset.taskval, 10);
-        let curTasks = this.state.currentTasks;
         
+        let curTasks = this.state.currentTasks;
         let prevTasks = this.state.prevTasks;
         let prevScore = this.state.score;
         let updatedCurTasks = curTasks.filter(element => {
@@ -89,7 +67,6 @@ class PersonalMotivation extends Component {
         };
         this.setState({ currentTasks: updatedCurTasks, prevTasks: prevTasks, score: updatedScore });
         
-        
         fetch('http://localhost:3000/persons/' + this.state.id, {
             method: 'PATCH',
             headers: {
@@ -97,7 +74,60 @@ class PersonalMotivation extends Component {
             },
             body: JSON.stringify( modification )
               });
+    }
+   
+   removeTask = (e) => {       
+        let personid = this.state.id;
+        let taskid = parseInt(e.target.parentElement.dataset.taskid, 10);
+        let curTasks = this.state.currentTasks;
+        let updatedCurTasks = curTasks.filter(element => {
+            return element !== taskid;
+        });
+        this.setState({ currentTasks: updatedCurTasks });
         
+        let modification = {
+            currentTasks: updatedCurTasks
+        }
+        fetch('http://localhost:3000/persons/' + this.state.id, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( modification )
+        });
+    }
+   
+    removePeriodical = (e) => {
+        let personid = this.state.id,
+            taskid = parseInt(e.target.parentElement.parentElement.dataset.taskid, 10),
+            curTasks = this.state.currentTasks,
+            periodicTasks = this.state.periodicTasks;
+        
+        let updatedCurTasks = curTasks.filter(element => {
+            return element !== taskid;
+        });
+        
+        let updatedPerTasks = periodicTasks.filter(element => {
+            return element.id !== taskid;
+        });
+        
+        this.setState({ 
+            currentTasks: updatedCurTasks,
+            periodicTasks: updatedPerTasks
+        });
+        
+        let modification = {
+            periodicTasks: updatedPerTasks,
+            currentTasks: updatedCurTasks
+        };
+        
+        fetch('http://localhost:3000/persons/' + personid, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( modification )
+        });
     }
     
    render(){
@@ -107,7 +137,7 @@ class PersonalMotivation extends Component {
                        <h4 className="label">Your current Tasks</h4>
                         <ul>
                         {this.state.currentTasksToShow.map(task => (
-                            <li key={task.id} data-taskval={task.score} data-taskid={task.id}><span>{task.name}</span> | <span className="value">{task.score}</span> | <span onClick={this.removeTask} id="remove-task">x</span> | <span onClick={this.completeTask} id="complete-task">{'\u2714'}</span></li>
+                            <li key={task.id} data-taskval={task.score} data-taskid={task.id}><span>{task.name}</span> | <span className="value">{task.score}</span> | <span onClick={this.removeTask} id="remove-task">x</span> | <span onClick={this.completeTask} id="complete-task">{'\u2714'}</span>{task.periodic ? <div className="periodical-info">Periodic <span onClick={this.removePeriodical} id="remove-periodical">Remove</span></div> : <div className="periodical-info">One-timer</div>}</li>
                         ))}
                         </ul>
                         </div>

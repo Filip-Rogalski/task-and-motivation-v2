@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import filterTasks from './filterTasks_1';
 import getCompletionArray from './getCompletionArray';
+import TaskItem from './TaskItem.jsx';
 
 class PersonalCard extends Component {
     constructor(props){
@@ -10,6 +11,7 @@ class PersonalCard extends Component {
             name: '', 
             currentTasks: [], 
             prevTasks: [], 
+            periodicTasks: [],
             score: 0, 
             prevTasksToShow: [], 
             currentTasksToShow: [], 
@@ -26,6 +28,7 @@ class PersonalCard extends Component {
                 id: this.props.person.id,
                 name: data.name,
                 currentTasks: data.currentTasks,
+                periodicTasks: data.periodicTasks,
                 prevTasks: data.prevTasks,
                 score: data.score
             });
@@ -55,9 +58,63 @@ class PersonalCard extends Component {
     
     addTask = (e) => {
         let taskid = parseInt(e.target.parentElement.dataset.taskid, 10),
-            curTasks = this.state.currentTasks;
-        if (curTasks.indexOf(taskid) == -1) {
+            curTasks = this.state.currentTasks;    
             curTasks.push(taskid);
+        if(this.props.tasks.find(x => x.id == taskid).periodic) {
+            console.log('periodical');
+            let period = e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.value;
+            
+            let dateValue = e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.value;
+            
+            let startDate = '';
+            
+            if (dateValue.length < 10) {
+                let today = new Date(),
+                    day = today.getDate().toString(),
+                    month = (today.getMonth() + 1).toString(),
+                    year = today.getFullYear().toString();
+                
+                if (month.length < 2) {
+                    month = "0" + month;
+                }
+                
+                if (day.length < 2) {
+                    day = "0" + day;
+                }
+    
+                startDate = year + "-" + month + "-" + day;
+                    
+            } else {
+                startDate = dateValue;
+            }
+            
+            let newPeriodicTask = {
+                id: taskid,
+                period: period,
+                start: startDate
+            }
+            
+            let newPeriodic = this.state.periodicTasks;
+            newPeriodic.push(newPeriodicTask);
+            this.setState({
+                periodicTasks: newPeriodic
+            })
+            
+            let modification = {
+                periodicTasks: newPeriodic
+            }
+            fetch('http://localhost:3000/persons/' + this.state.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( modification )
+            });
+            
+        } else {
+            console.log('onetimer');
+        }
+        
             let updatedCurTasks = curTasks;
             updatedCurTasks.sort((a,b) => {
                 return a - b;
@@ -72,10 +129,7 @@ class PersonalCard extends Component {
                     'Content-Type': 'application/json'
                     },
                     body: JSON.stringify( modification )
-                      });
-        } else {
-            console.warn('task already in current task list');
-        }
+            });
     }
  
     showHideTasks = () => {
@@ -92,7 +146,7 @@ class PersonalCard extends Component {
                   <h4>Current tasks:</h4>
                    <ul>
                         {this.state.currentTasksToShow.map((task, index) => (
-                           <li key={index}><span>{task.name}</span> | <span className="value">{task.score}</span>{task.periodic ? <div className="periodical-info">Periodical</div> : <div className="periodical-info">One-timer</div>} </li>
+                           <li key={index}><span>{task.name}</span> | <span className="value">{task.score}</span> | {task.periodic ? <div className="periodical-info">Periodical</div> : <div className="periodical-info">One-timer</div>} </li>
                         ))}
                         </ul>
                 </div>                 
@@ -109,7 +163,11 @@ class PersonalCard extends Component {
                <h4>Add task</h4>
                 <ul>
                     {this.state.tasksToAdd.map(task => (
-                        <li key={task.id} data-taskid={task.id} className="add-button" onClick={this.addTask}><span>+ {task.name}</span> | <span className="value">{task.score}</span></li>
+                        
+                        <TaskItem key={task.id} taskid={task.id} addTask={this.addTask} name={task.name} score={task.score} periodic={task.periodic}/>
+                        
+                        
+                        
                     ))}
                 </ul>
             </div>}

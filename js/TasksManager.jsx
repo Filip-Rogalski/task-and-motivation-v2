@@ -32,7 +32,7 @@ class TasksManager extends Component {
     }
     
     handleNewTaskPeriodical = (e) => {
-        this.setState({newTaskPeriodical: e.target.value});
+        this.setState({newTaskPeriodical: e.target.checked});
     }
     
     handleSubmit = (e) => {
@@ -96,8 +96,7 @@ class TasksManager extends Component {
             <div className="existing-tasks">
             <ul>
                 {this.state.tasks.map(item => (
-                    <li key={item.id} data-taskid={item.id}><span >{item.name}</span> | {item.periodic ? <span className="periodical-info">Periodical</span> : <span className="periodical-info">One-timer</span>} |
-                    <span className="value"> {item.score}</span> | <button onClick={this.removeTask} id="remove-task-admin">Remove task</button></li>
+                    <li key={item.id} data-taskid={item.id}><span >{item.name}</span> | {item.periodic ? <span className="periodical-info">Periodical</span> : <span className="periodical-info">One-timer</span>} | <span className="value">{item.score}</span> | <span className="task-info">People engaged: XX </span> | <button onClick={this.removeTask} id="remove-task-admin">Remove task</button></li>
                 ))}
             </ul>
             </div>

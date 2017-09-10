@@ -52,6 +52,7 @@ class RegisterForm extends Component {
                     name: this.state.newUserName,
                     password: this.state.newUserPassword,
                     score: 0,
+                    periodicTasks: [],
                     currentTasks: [],
                     prevTasks: []
                 }
