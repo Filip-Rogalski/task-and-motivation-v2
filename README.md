@@ -56,7 +56,7 @@ The funny functionnality (and one that was a bit tricky to implement) are period
 
 ![periodic-task-1](screenshots/periodic-task-1.png)
 
-Let's suppose the worker has a weekly task (once a week refill the coffee machine), assigned on Tuesday, 12th of September. He/she has a week from tuesday the 12th to do it. If the worker completes the task before tuesday 13th, upon login on 13th or any subsequent day, he will find that task on his/her current tasks.
+Let's suppose the worker has a weekly task (once a week refill the coffee machine), assigned on Tuesday, 12th of September. He/she has a week from tuesday the 12th to do it. If the worker completes the task before tuesday 13th, upon login on 13th or any subsequent day, he/she will find that task on his/her current tasks.
 
 ![periodic-task-2](screenshots/periodic-task-2.png)
 
