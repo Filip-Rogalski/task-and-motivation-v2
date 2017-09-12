@@ -80,8 +80,16 @@
       "name": "John",
       "password": "asdf",
       "score": 375,
-      "periodicTasks": [],
-      "currentTasks": [],
+      "periodicTasks": [
+        {
+          "id": 19,
+          "period": "weekly",
+          "start": "2017-09-11"
+        }
+      ],
+      "currentTasks": [
+        19
+      ],
       "prevTasks": [
         1,
         4,
@@ -116,11 +124,18 @@
           "id": 22,
           "period": "weekly",
           "start": "2017-09-15"
+        },
+        {
+          "id": 3,
+          "period": "weekly",
+          "start": "2017-09-11"
         }
       ],
       "currentTasks": [
         1,
-        22
+        3,
+        22,
+        24
       ],
       "prevTasks": [
         1,
@@ -362,6 +377,12 @@
       "periodic": false,
       "score": "70",
       "id": 23
+    },
+    {
+      "name": "szafa",
+      "periodic": false,
+      "score": "5",
+      "id": 24
     }
   ]
 }

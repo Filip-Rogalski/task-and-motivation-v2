@@ -11,7 +11,6 @@ import Tasks from './Tasks.jsx';
 import Entrance from './Entrance.jsx';
 import "../sass/sass.scss";
 
-
 class App extends Component {
     render(){
         return (

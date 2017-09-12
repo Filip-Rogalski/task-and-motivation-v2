@@ -115,9 +115,9 @@ class Entrance extends Component {
             });
             }
             
-        }); //end fetch
-        
-        setTimeout(() => {
+            return true
+            
+        }).then(() => {
             let userActiveTasks = this.state.userTasks;
             
             let userUpdatedActiveTasks = userActiveTasks.concat(tasksToRefresh);
@@ -129,19 +129,19 @@ class Entrance extends Component {
             let modification = {
                 currentTasks: userUpdatedActiveTasks
             };
-        
-            fetch('http://localhost:3000/persons/' + this.state.logged, {
+            
+            return fetch('http://localhost:3000/persons/' + this.state.logged, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify( modification )
             });
-            
-            
-        }, 100);
-        
-        
+        }).then(() => {
+            window.location.href = 'http://localhost:3001/#/tasks';
+        }, (err) => {
+            console.log(err);
+        });
     }
      
      handleLogout = () => {

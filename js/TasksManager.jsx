@@ -50,9 +50,7 @@ class TasksManager extends Component {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify( newTask )
-              });
-        
-        setTimeout(()=>{
+              }).then(() => {
             fetch('http://localhost:3000/tasks').then(resp => {
             return resp.json();
         }).then(data => {
@@ -60,7 +58,17 @@ class TasksManager extends Component {
                  tasks: data
              });
         });
-        }, 10)
+        });
+        
+//        setTimeout(()=>{
+//            fetch('http://localhost:3000/tasks').then(resp => {
+//            return resp.json();
+//        }).then(data => {
+//             this.setState({
+//                 tasks: data
+//             });
+//        });
+//        }, 10)
     }
     
     removeTask = (e) => {
